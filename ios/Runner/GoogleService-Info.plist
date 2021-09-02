@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>778695391726-3n7tlep8iji85io2fj96qo376sjr2md8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.778695391726-3n7tlep8iji85io2fj96qo376sjr2md8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDSsePEm6_zBHDr6v9uHxgUB-0cBI74Ytw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>778695391726</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mykarfour.mykarfourprof</string>
+	<key>PROJECT_ID</key>
+	<string>mykarfour</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mykarfour.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:778695391726:ios:4d86d7884d63c37f3d36ff</string>
+	<key>DATABASE_URL</key>
+	<string>https://mykarfour.firebaseio.com</string>
+</dict>
+</plist>
