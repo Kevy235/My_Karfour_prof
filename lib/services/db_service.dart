@@ -50,12 +50,20 @@ class DbService {
       prefs.setInt(USER_SYSTEM_ID_KEY, user["school_system_id"]);
       prefs.setString(USER_PROVINCE_KEY, user["province"]);
       prefs.setString(USER_BIRTHDAY_KEY, user["birthday"]);
-      prefs.setBool(USER_ACTIVATED_KEY, (user["classes"] as List<dynamic>).isNotEmpty);
-      // prefs.setInt(USER_SUBJECT_ID_KEY, (user["subjects"] as List<dynamic>)[0]["id"]);
-      // prefs.setString(USER_SUBJECT_NAME_KEY, (user["subjects"] as List<dynamic>)[0]["name"]);
+      prefs.setBool(
+          USER_ACTIVATED_KEY, (user["classes"] as List<dynamic>).isNotEmpty);
+      prefs.setInt(
+          USER_SUBJECT_ID_KEY, (user["subjects"] as List<dynamic>)[0]["id"]);
+      prefs.setString(USER_SUBJECT_NAME_KEY,
+          (user["subjects"] as List<dynamic>)[0]["name"]);
       // print("grk,l");
-      if(user['picture']!=null)
-        prefs.setString(USER_IMAGE_KEY, (user["picture"].toString().contains("assets") || user["picture"].toString()=='default')?user["picture"]:(Apirequest.uploadHost+user["picture"]));
+      if (user['picture'] != null)
+        prefs.setString(
+            USER_IMAGE_KEY,
+            (user["picture"].toString().contains("assets") ||
+                    user["picture"].toString() == 'default')
+                ? user["picture"]
+                : (Apirequest.uploadHost + user["picture"]));
       else
         prefs.setString(USER_IMAGE_KEY, 'default');
 
@@ -83,7 +91,7 @@ class DbService {
     try {
       final prefs = await _preferences;
 
-      print(className+" "+classId.toString()+" "+systemId.toString());
+      print(className + " " + classId.toString() + " " + systemId.toString());
 
       prefs.setInt(USER_CLASS_ID_KEY, classId);
       prefs.setString(USER_CLASSNAME_KEY, className);
@@ -147,13 +155,14 @@ class DbService {
 
   Future<User> getUser() async {
     final prefs = await _preferences;
-    return User(id:await prefs.getInt(USER_ID_KEY),
-        name:await prefs.getString(USER_NAME_KEY),
+    return User(
+        id: await prefs.getInt(USER_ID_KEY),
+        name: await prefs.getString(USER_NAME_KEY),
         username: await prefs.getString(USER_USERNAME_KEY),
         classroom: await prefs.getString(USER_CLASSNAME_KEY),
         photo: await prefs.getString(USER_IMAGE_KEY),
         email: await prefs.getString(USER_EMAIL_KEY),
-        students:await prefs.getInt(USER_STUDENTS_KEY)??0,
+        students: await prefs.getInt(USER_STUDENTS_KEY) ?? 0,
         province: await prefs.getString(USER_PROVINCE_KEY),
         subject_name: await prefs.getString(USER_SUBJECT_NAME_KEY),
         subject_id: await prefs.getInt(USER_SUBJECT_ID_KEY),

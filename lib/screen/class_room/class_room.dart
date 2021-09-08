@@ -64,6 +64,7 @@ class _ClassroomScreenState extends State<ClassroomScreen>
     user = await dbService.getUser();
     setState(() {
       user = user;
+      print(user.subject_name);
     });
   }
 
@@ -81,8 +82,7 @@ class _ClassroomScreenState extends State<ClassroomScreen>
     if (response.statusCode == 200) {
       _loading = false;
       dynamic jsonResponse = json.decode(response.body);
-
-      dbService.saveUser(jsonResponse["0"]);
+      // print(jsonResponse);
       setState(() {
         classes = jsonResponse['0']['classes'] as List<dynamic>;
       });
@@ -183,48 +183,43 @@ class _ClassroomScreenState extends State<ClassroomScreen>
                                     ),
                                   ),
                                 )
-                              : Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 18),
-                                    child: FutureBuilder<bool>(
-                                      future: getProfile(),
-                                      builder: (BuildContext context,
-                                          AsyncSnapshot<bool> snapshot) {
-                                        if (!snapshot.hasData) {
-                                          return const SizedBox();
-                                        } else {
-                                          if (classes.isNotEmpty)
-                                            return GridView(
-                                              padding: const EdgeInsets.all(12),
-                                              physics:
-                                                  const BouncingScrollPhysics(),
-                                              scrollDirection: Axis.vertical,
-                                              children: List<Widget>.generate(
-                                                classes.length,
-                                                (int index) {
-                                                  return getButtonUI(
-                                                      classes[index]);
-                                                },
-                                              ),
-                                              gridDelegate:
-                                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 4,
-                                                mainAxisSpacing: 12.0,
-                                                crossAxisSpacing: 12.0,
-                                                childAspectRatio: 0.95,
-                                              ),
-                                            );
-                                          else
-                                            return user.activated
-                                                ? SizedBox()
-                                                : Center(
-                                                    child: Text(
-                                                    "Votre souscription est en cours de traitement...",
-                                                  ));
-                                        }
-                                      },
-                                    ),
-                                  ),
+                              : FutureBuilder<bool>(
+                                  future: getProfile(),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<bool> snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return const SizedBox();
+                                    } else {
+                                      if (classes.isNotEmpty)
+                                        return GridView(
+                                          padding: const EdgeInsets.all(12),
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          scrollDirection: Axis.vertical,
+                                          children: List<Widget>.generate(
+                                            classes.length,
+                                            (int index) {
+                                              return getButtonUI(
+                                                  classes[index]);
+                                            },
+                                          ),
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 4,
+                                            mainAxisSpacing: 12.0,
+                                            crossAxisSpacing: 12.0,
+                                            childAspectRatio: 0.95,
+                                          ),
+                                        );
+                                      else
+                                        return user.activated
+                                            ? SizedBox()
+                                            : Center(
+                                                child: Text(
+                                                "Votre souscription est en cours de traitement...",
+                                              ));
+                                    }
+                                  },
                                 ),
                         )
                       ],
@@ -240,7 +235,6 @@ class _ClassroomScreenState extends State<ClassroomScreen>
   }
 
   Widget getButtonUI(dynamic classroom) {
-    print(classroom);
     String txt = classroom["name"];
     return Expanded(
       child: Container(

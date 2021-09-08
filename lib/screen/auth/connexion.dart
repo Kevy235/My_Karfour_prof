@@ -71,6 +71,7 @@ class _ConnexionState extends State<Connexion> {
     });
     if (response.statusCode == 200) {
       dynamic jsonResponse = json.decode(response.body);
+      print(jsonResponse["user"]);
       dbService.saveUser(jsonResponse["user"]);
       dbService.saveTokens(Tokens.fromJson(jsonResponse["tokens"]));
       Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -187,6 +188,7 @@ class _ConnexionState extends State<Connexion> {
                               left: 40, right: 40, top: 20),
                           child: Container(
                             child: TextFormField(
+                              keyboardType: TextInputType.number,
                               validator: (e) {
                                 String patttern = r'(^(?:[+0])?[0-9]{10,12}$)';
                                 RegExp regExp = new RegExp(patttern);

@@ -8,6 +8,7 @@ import 'package:mykarfour/model/user.dart';
 import 'package:mykarfour/screen/chat/chat_details.dart';
 import 'package:mykarfour/screen/profile/settings.dart';
 import 'package:mykarfour/services/db_service.dart';
+import 'package:mykarfour/size_config.dart';
 import 'package:mykarfour/theme/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,12 +43,13 @@ class _ChatScreenState extends State<ChatScreen>
     super.initState();
     getSharedPrefs();
     getUser();
+    print(messageList);
   }
 
   @override
   Widget build(BuildContext context) {
     final chatList = Container(
-      height: 500.0,
+      height: getProportionateScreenHeight(550.0),
       child: buildMessageList(),
     );
 
@@ -218,7 +220,7 @@ class _ChatScreenState extends State<ChatScreen>
   }
 
   Widget _buildChatTile(Message message, BuildContext context) {
-    final unreadCount = Positioned(
+    /* final unreadCount = Positioned(
       bottom: 9.0,
       right: 0.0,
       child: Container(
@@ -236,13 +238,13 @@ class _ChatScreenState extends State<ChatScreen>
           ),
         ),
       ),
-    );
+    ); */
 
     final userImage = InkWell(
       child: Stack(
         children: <Widget>[
           Hero(
-            tag: message.name + "_image",
+            tag: "_image",
             child: Container(
               margin: EdgeInsets.only(right: 8.0, bottom: 10.0),
               height: 70.0,
@@ -254,14 +256,14 @@ class _ChatScreenState extends State<ChatScreen>
                           message.avatar == "" ||
                           message.avatar == "null")
                       ? AssetImage('assets/icons/default_course.png')
-                      : AssetImage(message.avatar),
+                      : NetworkImage(message.avatar),
                   fit: BoxFit.cover,
                 ),
                 shape: BoxShape.circle,
               ),
             ),
           ),
-          message.unreadMessages == 0 ? Container() : unreadCount
+          // message.unreadMessages == 0 ? Container() : unreadCount
         ],
       ),
     );
@@ -329,7 +331,7 @@ class _ChatScreenState extends State<ChatScreen>
           .reference()
           .child("users/" +
               user.classroom.toString() +
-              '/' +
+              "/" +
               user.subject_id.toString() +
               "/chat/")
           .orderByChild("timestamp")
@@ -353,6 +355,7 @@ class _ChatScreenState extends State<ChatScreen>
                 value['unReadMessages'] == null ? 0 : value['unReadMessages']));
           });
           messageList.sort((a, b) => a.time.compareTo(b.time));
+          // print(messageList);
           return SafeArea(
             child: ListView.separated(
               itemCount: messageList.length,
@@ -514,6 +517,8 @@ class _ChatScreenState extends State<ChatScreen>
     setState(() {
       user = user;
     });
+    print(user.classroom);
+    print(user.subject_id);
   }
 
   ImageProvider<dynamic> setImage() {

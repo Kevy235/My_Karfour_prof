@@ -78,7 +78,9 @@ class _SubjectScreenState extends State<SubjectScreen>
       _loading = true;
     });
 
-    var url = Apirequest.subjects + user.subject_id.toString() + '/chapters';
+    //var url = Apirequest.subjects + user.subject_id.toString() + '/chapters';
+
+    var url = Apirequest.themes + user.subject_id.toString() + '/chapters';
 
     final response = await http.get(url, headers: {
       HttpHeaders.authorizationHeader: "Bearer ${await accessToken}",

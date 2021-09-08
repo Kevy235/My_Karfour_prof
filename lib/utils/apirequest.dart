@@ -11,6 +11,7 @@ class Apirequest{
   static final pay = Apirequest.subscription+'/payment';
   static final class_url = Apirequest.apiHost+'class/';
   static final subjects = Apirequest.apiHost+'subject/';
+  static final themes = Apirequest.apiHost + 'theme/';
   static final subjects_url = Apirequest.apiHost+'subjects/';
   static final update_password = Apirequest.apiHost+'user/update/password';
   static final chapter = Apirequest.apiHost+'chapter/';
